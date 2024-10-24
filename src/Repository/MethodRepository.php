@@ -2,11 +2,13 @@
 
 namespace App\Repository;
 
+
+use App\Entity\Method;
 use Doctrine\Persistence\ManagerRegistry; 
 use phpDocumentor\Reflection\Types\Boolean;
 
 #[\AllowDynamicProperties]
-class TestRepository 
+class MethodRepository 
 {
 
     public $mssql_conn = null;
@@ -22,8 +24,23 @@ class TestRepository
     }
 
     public function getData(): ?Array {
-        $sql="select * from method";
+        $sql = "SELECT * 
+                FROM method
+                ";
         return $this->mssql_conn->fetchAllAssociative($sql);
     }
+    
+
+    // /**
+    //  * get metod by id
+    //  * @param string $id
+    //  */
+    // public function getDataById(string $id): ?Array {
+    //     $sql = "SELECT * 
+    //             FROM method 
+    //             WHERE id = '$id'
+    //             ";
+    //     return $this->pg_conn->fetchAllAssociative($sql);
+    // }
 
 }
