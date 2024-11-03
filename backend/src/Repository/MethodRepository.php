@@ -31,16 +31,24 @@ class MethodRepository
     }
     
 
-    // /**
-    //  * get metod by id
+    /**
+     * get metod by id
+     * @param string $id
+     */
+    public function getDataById(string $id): ?Array {
+        $sql = "SELECT * 
+                FROM method 
+                WHERE id = '$id'
+                ";
+        return $this->mssql_conn->fetchAllAssociative($sql);
+    }
+
+    //  /**
+    //  * find metod by id for
     //  * @param string $id
     //  */
-    // public function getDataById(string $id): ?Array {
-    //     $sql = "SELECT * 
-    //             FROM method 
-    //             WHERE id = '$id'
-    //             ";
-    //     return $this->pg_conn->fetchAllAssociative($sql);
+    // public function findById(string $id): ?Method {
+    //     return $this->find($id); 
     // }
 
 }
