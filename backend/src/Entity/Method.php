@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\MethodRepository;
+use App\Repository\MethodCrudRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: MethodRepository::class)]
+#[ORM\Entity(repositoryClass: MethodCrudRepository::class)]
 #[ORM\Table(name: 'method')]
 class Method
 {

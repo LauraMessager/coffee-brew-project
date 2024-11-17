@@ -11,33 +11,34 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class BrewGuideRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, BrewGuide::class);
-    }
+  public $mssql_conn = null;
 
-//    /**
-//     * @return BrewGuide[] Returns an array of BrewGuide objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+  /**
+   * Initialize connections
+   * @param ManagerRegistry $doctrine
+   * 
+   */
+  public function __construct(ManagerRegistry $doctrine)
+  {
+    $this->mssql_conn = $doctrine->getConnection();    
+  }
 
-//    public function findOneBySomeField($value): ?BrewGuide
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+  public function getData(): ?Array {
+    $sql = "SELECT * 
+            FROM brew_guide
+            ";
+    return $this->mssql_conn->fetchAllAssociative($sql);
+  }
+
+  /**
+   * get metod by id
+   * @param string $id
+   */
+  public function getDataById(string $id): ?Array {
+    $sql = "SELECT * 
+            FROM brew_guide 
+            WHERE id = '$id'
+            ";
+    return $this->mssql_conn->fetchAllAssociative($sql);
+  }
 }

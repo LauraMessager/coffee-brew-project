@@ -2,9 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\BrewGuideRepository;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\User;
 
 #[ORM\Entity(repositoryClass: BrewGuideRepository::class)]
 class BrewGuide
@@ -20,10 +19,11 @@ class BrewGuide
     #[ORM\Column(length: 1500, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?int $created_by = null;
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: false, name: "created_by", referencedColumnName: "id")]
+    private ?User $created_by = null;
 
-    #[ORM\Column(type: Types::TIME_MUTABLE, nullable: true)]
+    #[ORM\Column(type: "datetime", nullable: true)]
     private ?\DateTimeInterface $created_at = null;
 
     public function getId(): ?int
@@ -39,7 +39,6 @@ class BrewGuide
     public function setTitle(string $title): static
     {
         $this->title = $title;
-
         return $this;
     }
 
@@ -51,19 +50,17 @@ class BrewGuide
     public function setDescription(?string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
-    public function getCreatedBy(): ?int
+    public function getCreatedBy(): ?User
     {
         return $this->created_by;
     }
 
-    public function setCreatedBy(int $created_by): static
+    public function setCreatedBy(User $created_by): static
     {
         $this->created_by = $created_by;
-
         return $this;
     }
 
@@ -75,7 +72,6 @@ class BrewGuide
     public function setCreatedAt(?\DateTimeInterface $created_at): static
     {
         $this->created_at = $created_at;
-
         return $this;
     }
 }

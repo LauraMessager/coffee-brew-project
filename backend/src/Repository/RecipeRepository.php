@@ -2,42 +2,44 @@
 
 namespace App\Repository;
 
+
 use App\Entity\Recipe;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Persistence\ManagerRegistry; 
+use phpDocumentor\Reflection\Types\Boolean;
 
-/**
- * @extends ServiceEntityRepository<Recipe>
- */
-class RecipeRepository extends ServiceEntityRepository
+#[\AllowDynamicProperties]
+class RecipeRepository 
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Recipe::class);
-    }
 
-//    /**
-//     * @return Recipe[] Returns an array of Recipe objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('r.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+  public $mssql_conn = null;
 
-//    public function findOneBySomeField($value): ?Recipe
-//    {
-//        return $this->createQueryBuilder('r')
-//            ->andWhere('r.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+  /**
+   * Initialize connections
+   * @param ManagerRegistry $doctrine
+   * 
+   */
+  public function __construct(ManagerRegistry $doctrine)
+  {
+    $this->mssql_conn = $doctrine->getConnection();    
+  }
+
+  public function getData(): ?Array {
+    $sql = "SELECT * 
+            FROM recipe
+            ";
+    return $this->mssql_conn->fetchAllAssociative($sql);
+  }
+  
+
+  /**
+   * get metod by id
+   * @param string $id
+   */
+  public function getDataById(string $id): ?Array {
+    $sql = "SELECT * 
+            FROM recipe 
+            WHERE id = '$id'
+            ";
+    return $this->mssql_conn->fetchAllAssociative($sql);
+  }
 }

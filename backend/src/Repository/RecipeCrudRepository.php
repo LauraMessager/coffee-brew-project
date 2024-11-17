@@ -2,22 +2,22 @@
 
 namespace App\Repository;
 
-use App\Entity\Method;
+use App\Entity\Recipe;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
-class MethodCrudRepository extends ServiceEntityRepository
+class RecipeCrudRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $registry)
   {
-    parent::__construct($registry, Method::class);
+    parent::__construct($registry, Recipe::class);
   }
 
   /**
-   * Get all methods
-   * @return Method[]
+   * Get all recipes
+   * @return Recipe[]
    */
-  public function getAllMethods(): array
+  public function getAllRecipes(): array
   {
     return $this->findAll();
   }
@@ -25,9 +25,9 @@ class MethodCrudRepository extends ServiceEntityRepository
   /**
    * Find method by ID
    * @param int $id
-   * @return Method|null
+   * @return Recipe|null
    */
-  public function findById(int $id): ?Method
+  public function findById(int $id): ?Recipe
   {
     return $this->find($id);
   }

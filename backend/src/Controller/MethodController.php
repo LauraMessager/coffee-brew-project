@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[\AllowDynamicProperties]
-// #[IsGranted('ADMIN')]
+// #[IsGranted('ROLE_ADMIN')]
 #[Route('/api/method', name: 'method')]
 class MethodController extends AbstractController {
 
