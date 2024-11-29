@@ -8,6 +8,7 @@ import MethodsPage from "../pages/methods";
 import MainPage from "../pages/main";
 import RecipePage from "../pages/recipes";
 import BrewGuidePage from "../pages/brewGuide";
+import NewBrewGuidePage from "../pages/newBrewGuide";
 // import ProtectedRoute from "../components/protectedRoute";
 
 export const router = createBrowserRouter([
@@ -64,6 +65,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Logout />
+      </Layout>
+    ),
+  },
+  {
+    path: "/new-brew-guide",
+    element: (
+      <Layout>
+        <NewBrewGuidePage />
       </Layout>
     ),
   },

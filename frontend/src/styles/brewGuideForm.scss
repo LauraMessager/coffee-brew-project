@@ -17,6 +17,14 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 }
 
 .brew-guide-form {
@@ -83,7 +91,7 @@ textarea {
 }
 
 button {
-  width: 100%;
+  // width: 100%;
   padding: 0.8rem;
   font-size: 16px;
   border-radius: 8px;
@@ -96,12 +104,23 @@ button {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f25042;
+    background-color: #e32816;
   }
 
   &:disabled {
     background-color: #ddd;
     cursor: not-allowed;
+  }
+  &.delete-x {
+    padding: 0;
+    font-size: 20px;
+    color: rgba(242, 80, 66, 0.7);
+    background: transparent;
+
+    &:hover {
+      color: #e32816;
+      background: transparent;
+    }
   }
 }
 

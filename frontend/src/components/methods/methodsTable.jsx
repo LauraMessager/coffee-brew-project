@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import MethodDelete from "./methodDelete";
 
 const MethodTable = ({ methods }) => {
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const handleDeleteSuccess = (message) => {
+    setSuccessMessage(message);
+  };
   return (
     <div className="method-table">
-      <h2>Methods</h2>
+      <h4>List of existing methods of extraction</h4>
       {methods.length === 0 ? (
         <p>No methods available</p>
       ) : (
@@ -13,6 +19,7 @@ const MethodTable = ({ methods }) => {
             <tr>
               <th>Name</th>
               <th>Icon</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -31,6 +38,12 @@ const MethodTable = ({ methods }) => {
                       }}
                     />
                   )}
+                </td>
+                <td>
+                  <MethodDelete
+                    id={method.id}
+                    onDeleteSuccess={handleDeleteSuccess}
+                  />
                 </td>
               </tr>
             ))}

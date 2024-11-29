@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
+import BrewGuideDelete from "./brewGuideDelete";
 
 const BrewGuideTable = ({ brewGuides }) => {
+  const [successMessage, setSuccessMessage] = useState(null);
+
+  const handleDeleteSuccess = (message) => {
+    setSuccessMessage(message);
+  };
+
   return (
     <div className="brew-guide-table">
-      <h2>Brew Guides</h2>
+      <h4>List of existing Brew Guides</h4>
       <table>
         <thead>
           <tr>
             <th>Title</th>
             <th>Description</th>
             <th>Created By</th>
+            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -19,6 +27,12 @@ const BrewGuideTable = ({ brewGuides }) => {
               <td>{guide.title}</td>
               <td>{guide.description}</td>
               <td>{guide.created_by}</td>
+              <td>
+                <BrewGuideDelete
+                  id={guide.id}
+                  onDeleteSuccess={handleDeleteSuccess}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

@@ -18,6 +18,14 @@ body {
   font-weight: 400;
   letter-spacing: 0;
   padding: 2rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    padding: 0.5rem;
+  }
 }
 
 .method-form {
@@ -90,7 +98,7 @@ h2 {
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: #f25042;
+    background-color: #e32816;
   }
 
   &:disabled {

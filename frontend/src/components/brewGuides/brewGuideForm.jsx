@@ -4,7 +4,6 @@ import "../../styles/brewGuideForm.scss";
 const BrewGuideForm = ({ onSubmit, errorMessage, successMessage, loading }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState(null);
 
   const handleFileChange = (e) => {
     setImage(e.target.files[0]);
@@ -15,9 +14,6 @@ const BrewGuideForm = ({ onSubmit, errorMessage, successMessage, loading }) => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
-    if (image) {
-      formData.append("image", image);
-    }
 
     onSubmit(formData);
   };
@@ -49,16 +45,6 @@ const BrewGuideForm = ({ onSubmit, errorMessage, successMessage, loading }) => {
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-        />
-      </div>
-
-      <div className="form-group">
-        <label htmlFor="image">Upload Image (Optional)</label>
-        <input
-          type="file"
-          id="image"
-          accept="image/jpeg, image/png, image/webp"
-          onChange={handleFileChange}
         />
       </div>
 

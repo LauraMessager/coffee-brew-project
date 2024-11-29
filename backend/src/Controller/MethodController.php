@@ -2,15 +2,17 @@
 
 namespace App\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Repository\MethodRepository;
 use App\Repository\MethodCrudRepository;
+// use App\Repository\RecipeRepository;
+use App\Repository\RecipeCrudRepository;
 use App\Entity\Method;
-use Symfony\Component\HttpFoundation\Request;
-use Doctrine\ORM\EntityManagerInterface;
 
 #[\AllowDynamicProperties]
 #[Route('/api/method', name: 'method')]
@@ -18,10 +20,13 @@ class MethodController extends AbstractController {
 
   private MethodRepository $methodRepository;
   private MethodCrudRepository $methodCrudRepository;
+  // private RecipeRepository $recipeRepository;
+  private RecipeCrudRepository $recipeCrudRepository;
   private EntityManagerInterface $entityManager; 
 
-  public function __construct(MethodRepository $methodRepository, EntityManagerInterface $entityManager, MethodCrudRepository $methodCrudRepository) {
+  public function __construct(MethodRepository $methodRepository, RecipeCrudRepository $recipeCrudRepository, EntityManagerInterface $entityManager, MethodCrudRepository $methodCrudRepository) {
     $this->methodRepository = $methodRepository;
+    $this->recipeCrudRepository = $recipeCrudRepository;
     $this->entityManager = $entityManager;
     $this->methodCrudRepository = $methodCrudRepository;
   }
@@ -130,6 +135,14 @@ class MethodController extends AbstractController {
     if (!$method) {
         return new JsonResponse(['message' => 'Method not found'], Response::HTTP_NOT_FOUND);
     }
+
+    $recipes = $this->recipeCrudRepository->findBy(['method' => $method]);
+
+    foreach ($recipes as $recipe) {
+      $recipe->setMethod(null);
+      $this->entityManager->persist($recipe);
+  }
+
     $this->entityManager->remove($method); 
     $this->entityManager->flush();
 
