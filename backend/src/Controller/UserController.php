@@ -9,16 +9,20 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 #[Route('/api/user', name: 'user')]
 class UserController
 {
   private UserPasswordHasherInterface $passwordHasher;
   private EntityManagerInterface $entityManager;
+  private NelmioCorsMiddleware $cors;
 
   public function __construct(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $entityManager)
   {
+    //parent::__construct($cors);
     $this->passwordHasher = $passwordHasher;
     $this->entityManager = $entityManager;
+
   }
 
   /**
@@ -96,8 +100,12 @@ class UserController
       $user->setApiToken($apiToken);
       $this->entityManager->persist($user);
       $this->entityManager->flush();
-
-      return new JsonResponse(['apiToken' => $apiToken], JsonResponse::HTTP_OK);
+      
+      $roles = $user->getRoles();
+      return new JsonResponse([
+          'apiToken' => $apiToken,
+          'roles' => $roles
+      ], JsonResponse::HTTP_OK);
     }
 
     /**

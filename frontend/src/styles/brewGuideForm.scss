@@ -1,0 +1,112 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #f9f4ef;
+}
+
+body {
+  color: #272727;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0;
+  padding: 2rem;
+}
+
+.brew-guide-form {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #020826;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  background-color: #f9f4ef;
+  color: #272727;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #8c7851;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.success-message {
+  color: green;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+button {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  background-color: rgba(242, 80, 66, 0.7);
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #f25042;
+  }
+
+  &:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+}
+
+@media (max-width: 768px) {
+  .brew-guide-form {
+    padding: 1.5rem;
+  }
+}

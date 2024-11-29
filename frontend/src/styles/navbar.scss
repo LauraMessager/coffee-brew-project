@@ -1,0 +1,150 @@
+/* Font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Roboto", system-ui;
+  font-weight: 700;
+  background-color: #f9f4ef;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #f9f4ef;
+  text-align: center;
+  height: 3rem;
+  z-index: 99;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  border: 1px solid rgba(140, 120, 81, 1);
+
+  &__label {
+    cursor: pointer;
+    color: #f25042;
+    font-size: 24px;
+    display: none;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__input:checked + div {
+    display: block;
+  }
+
+  div {
+    display: none;
+
+    ul {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-direction: column;
+      li {
+        margin: 0.5rem 0;
+        padding: 0.25rem;
+        transition: background-color 0.3s;
+        &:hover {
+          background-color: rgba(113, 96, 64, 1);
+          border-radius: 10px;
+
+          a {
+            color: #fff;
+          }
+        }
+
+        a {
+          color: #716040;
+          text-decoration: none;
+          display: inline-block;
+          padding: 0.25rem;
+          transition: color 0.3s;
+        }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 60em) {
+    &__label {
+      display: block;
+    }
+
+    div {
+      position: absolute;
+      top: 3rem;
+      left: 0;
+      right: 0;
+      background: #f9f4ef;
+      text-align: left;
+
+      ul {
+        flex-direction: column;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 60.063em) {
+    &__label {
+      display: none;
+    }
+
+    div {
+      display: block;
+      ul {
+        flex-direction: row;
+      }
+    }
+  }
+}
+
+.navbar img {
+  width: 150px;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}
+
+button {
+  font-family: "Roboto", sans-serif;
+  background-color: #8c7851;
+  font-size: 0.875rem;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.25rem 0.75rem;
+  margin: 0 0.5rem;
+  display: inline-block;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(140, 120, 81, 0.7);
+}
+
+.navbar ul li button {
+  height: auto;
+  align-self: center;
+}
+
+.btn-logout {
+  color: #020826;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(242, 80, 66, 0.7);
+  background: rgba(242, 80, 66, 0.7);
+}
+
+.btn-logout:hover {
+  background-color: #f25042;
+}

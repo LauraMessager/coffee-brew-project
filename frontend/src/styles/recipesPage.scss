@@ -1,0 +1,30 @@
+.recipes-page {
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 18px;
+    margin: 20px 0;
+    color: #8c7851;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .cards_item {
+    padding: 1rem;
+    width: 100%;
+
+    @media (min-width: 40rem) {
+      width: 50%;
+    }
+
+    @media (min-width: 56rem) {
+      width: 33.3333%;
+    }
+  }
+}

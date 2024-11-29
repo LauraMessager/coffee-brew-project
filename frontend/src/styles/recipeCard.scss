@@ -1,0 +1,84 @@
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  .cards_item {
+    display: flex;
+    padding: 1rem;
+
+    @media (min-width: 40rem) {
+      width: 50%;
+    }
+
+    @media (min-width: 56rem) {
+      width: 33.3333%;
+    }
+  }
+
+  .card {
+    background-color: #fffffe;
+    border-radius: 0.5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(2, 8, 38, 1);
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+    .card_content {
+      padding: 1rem;
+
+      .card_title {
+        color: #020826;
+        font-family: "Roboto", sans-serif;
+        font-weight: 700;
+        font-size: 1.5rem;
+        margin: 0 0 0.5rem 0;
+      }
+
+      .card_text {
+        color: #8c7851;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin: 0 0 1rem 0;
+        font-weight: 400;
+      }
+
+      .tag {
+        font-family: "Roboto", sans-serif;
+        background-color: #8c7851;
+        font-size: 0.8rem;
+        color: #ffffff;
+        border-radius: 0.95rem;
+        text-align: center;
+        margin: 0.5rem 0 1rem 0;
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+
+        &:hover {
+          background-color: rgba(140, 120, 81, 0.7);
+        }
+      }
+
+      .btn {
+        color: #020826;
+        padding: 0.5rem 1rem;
+        font-family: "Roboto", sans-serif;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        font-weight: 400;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: rgba(242, 80, 66, 0.7);
+
+        &:hover {
+          background-color: #f25042;
+        }
+      }
+    }
+  }
+}

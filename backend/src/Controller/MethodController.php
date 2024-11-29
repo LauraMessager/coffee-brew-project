@@ -13,7 +13,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Doctrine\ORM\EntityManagerInterface;
 
 #[\AllowDynamicProperties]
-// #[IsGranted('ROLE_ADMIN')]
 #[Route('/api/method', name: 'method')]
 class MethodController extends AbstractController {
 
@@ -49,6 +48,7 @@ class MethodController extends AbstractController {
   * @return JsonResponse
   * @param string $id
   */
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/ref/{id}', name: 'method_by_id')]
   public function methodById(string $id): JsonResponse {
     $datas = $this->methodRepository->getDataById($id);
@@ -66,30 +66,47 @@ class MethodController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/add', name: 'create_method', methods: ['GET', 'POST'])]
   public function create(Request $request): JsonResponse {
     $data = json_decode($request->getContent(), true);
     $errors = [];
 
     if (!isset($data['name']) || trim($data['name']) === '') {
-        $errors['name'] = 'Name is required';
+      $errors['name'] = 'Name is required';
     }
+
+    $icon = $request->files->get('icon');
+    if (!$icon) {
+      $errors['icon'] = 'Icon is required.';
+    } elseif (!$icon->isValid()) {
+      $errors['icon'] = 'Invalid file upload.';
+    } elseif (!in_array($icon->getMimeType(), ['image/jpeg', 'image/png', 'image/webp'])) {
+      $errors['icon'] = 'Invalid file type. Only JPEG, PNG, or WebP are allowed.';
+    } elseif ($icon->getSize() > 2 * 1024 * 1024) {
+      $errors['icon'] = 'File size exceeds 2MB.';
+    }
+
     if (!empty($errors)) {
-        return new JsonResponse([
-            'message' => 'Validation failed',
-            'errors' => $errors,
-        ], Response::HTTP_BAD_REQUEST);
+      return new JsonResponse([
+        'message' => 'Validation failed',
+        'errors' => $errors,
+      ], Response::HTTP_BAD_REQUEST);
     }
+
+    $uploadDir = $this->getParameter('upload_directory');
+    $fileName = uniqid() . '.' . $icon->guessExtension();
+    $icon->move($uploadDir, $fileName);
 
     $method = new Method();
     $method->setName($data['name']);
-    $method->setIcon($data['icon'] ?? null);
+    $method->setIcon('/uploads/' . $fileName); 
 
     $this->entityManager->persist($method);
     $this->entityManager->flush();
 
     return new JsonResponse([
-        'message' => 'Method created successfully!',
+        'message' => 'Method created successfully.',
         'method' => [
             'id' => $method->getId(),
             'name' => $method->getName(),
@@ -104,6 +121,7 @@ class MethodController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
     #[Route('/delete/{id}', name: 'delete_method', methods: ['DELETE'])]
     public function delete(Request $request, int $id): JsonResponse {
     
@@ -116,7 +134,7 @@ class MethodController extends AbstractController {
     $this->entityManager->flush();
 
     return new JsonResponse([
-        'message' => 'Method deleted successfully',
+        'message' => 'Method deleted successfully.',
         'deletedId' => $method->getId(),
     ], Response::HTTP_OK);
 }
@@ -126,6 +144,7 @@ class MethodController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/update/{id}', name: 'update_method', methods: ['POST'])]
   public function update(Request $request, int $id): JsonResponse {
     $method = $this->methodCrudRepository->findById($id);
@@ -158,7 +177,7 @@ class MethodController extends AbstractController {
     $this->entityManager->flush();
 
     return new JsonResponse([
-        'message' => 'Method updated successfully!',
+        'message' => 'Method updated successfully.',
         'method' => [
             'id' => $method->getId(),
             'name' => $method->getName(),

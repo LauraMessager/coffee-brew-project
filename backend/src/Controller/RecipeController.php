@@ -34,6 +34,8 @@ class RecipeController extends AbstractController {
   * Get all the existing recipes
   * @return JsonResponse
   */
+  #[IsGranted('ROLE_ADMIN')]
+  #[IsGranted('ROLE_USER')]  
   #[Route('/', name: 'recipes')]
   public function index(): JsonResponse {
     $datas = $this->recipeRepository->getData();
@@ -51,6 +53,8 @@ class RecipeController extends AbstractController {
   * @return JsonResponse
   * @param string $id
   */
+  #[IsGranted('ROLE_ADMIN')]
+  #[IsGranted('ROLE_USER')]
   #[Route('/recipe/{id}', name: 'recipe_by_id')]
   public function brewById(string $id): JsonResponse {
     $datas = $this->recipeRepository->getDataById($id);
@@ -68,6 +72,8 @@ class RecipeController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
+  #[IsGranted('ROLE_USER')]
   #[Route('/add', name: 'create_recipe', methods: ['GET', 'POST'])]
   public function create(Request $request): JsonResponse {
     $data = json_decode($request->getContent(), true);
@@ -131,6 +137,8 @@ class RecipeController extends AbstractController {
     * @return JsonResponse
     * @param Request $request
     */
+    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     #[Route('/update/{id}', name: 'update_recipe', methods: ['POST'])]
     public function update(Request $request, int $id): JsonResponse {
       $recipe = $this->recipeCrudRepository->findById($id);

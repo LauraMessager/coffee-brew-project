@@ -24,8 +24,9 @@ class BrewGuideRepository extends ServiceEntityRepository
   }
 
   public function getData(): ?Array {
-    $sql = "SELECT * 
-            FROM brew_guide
+    $sql = "SELECT bg.id, bg.title, bg.description, bg.created_by as user_id, us.name as created_by
+            FROM brew_guide bg
+            LEFT JOIN user us on bg.created_by = us.id
             ";
     return $this->mssql_conn->fetchAllAssociative($sql);
   }

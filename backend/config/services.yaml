@@ -16,3 +16,5 @@ services:
   App\Controller\:
     resource: "../src/Controller"
     tags: ["controller.service_arguments"]
+parameters:
+  upload_directory: "%kernel.project_dir%/public/uploads"
