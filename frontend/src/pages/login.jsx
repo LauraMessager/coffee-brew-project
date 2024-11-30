@@ -52,6 +52,9 @@ const LoginPage = () => {
         errorMessage={error}
         loading={loading}
       />
+      <div style={{ padding: "1em" }}>
+        <a href="/register">Don't have an account yet? Sign Up</a>
+      </div>
     </div>
   );
 };

@@ -6,10 +6,10 @@ const MainPage = () => {
   return (
     <div className="main-page">
       <div className="main-content">
-        <h1>Welcome to the Main Page</h1>
-        <p>Click the button below to go to the login form:</p>
+        <h1>Welcome to Coffee Brew</h1>
+        <p>Click the button below to start your caffeinated adventure</p>
         <Link to="/login">
-          <button className="login-btn">Go to Login</button>
+          <button className="login-btn">Login</button>
         </Link>
       </div>
     </div>

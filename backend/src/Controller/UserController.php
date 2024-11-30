@@ -46,7 +46,7 @@ class UserController
 
 
     /**
-     * Register Router
+     * Register Route
      */
     #[Route('/register', name: 'register', methods: ['POST'])]
     public function register(Request $request): JsonResponse
@@ -62,6 +62,10 @@ class UserController
       }
       if (empty($data['password'])) {
         $errors['password'] = 'Password is required';
+      }
+
+      if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{13,}$/', $data['password'])) {
+        $errors['password'] = 'Password must be at least 13 characters long, include an uppercase letter, a number, and a special character.';
       }
 
       if (!empty($errors)) {

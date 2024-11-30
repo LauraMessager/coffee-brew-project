@@ -9,9 +9,19 @@ import MainPage from "../pages/main";
 import RecipePage from "../pages/recipes";
 import BrewGuidePage from "../pages/brewGuide";
 import NewBrewGuidePage from "../pages/newBrewGuide";
+import ErrorPage from "../pages/error";
+import RegisterPage from "../pages/register";
 // import ProtectedRoute from "../components/protectedRoute";
 
 export const router = createBrowserRouter([
+  {
+    path: "*",
+    element: (
+      <Layout>
+        <ErrorPage />
+      </Layout>
+    ),
+  },
   {
     path: "/",
     element: (
@@ -25,6 +35,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Login />
+      </Layout>
+    ),
+  },
+  {
+    path: "/register",
+    element: (
+      <Layout>
+        <RegisterPage />
       </Layout>
     ),
   },
