@@ -13,37 +13,45 @@ const MethodPage = () => {
     setError("");
     setSuccess("");
 
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.apiToken) {
+      setError("User is not authenticated");
+      setLoading(false);
+      return;
+    }
+
+    const apiToken = user.apiToken;
+
     const formData = new FormData();
     formData.append("name", name);
-    formData.append("icon", icon);
-
-    const token = localStorage.getItem("user")
-      ? JSON.parse(localStorage.getItem("user")).apiToken
-      : null;
+    if (icon) formData.append("icon", icon);
 
     try {
       const response = await fetch("http://localhost:8001/api/method/add", {
         method: "POST",
-        body: formData,
         headers: {
-          Authorization: `Bearer ${token}`,
+          "auth-token": apiToken,
         },
+        body: formData,
       });
 
       if (!response.ok) {
         const errorData = await response.json();
         setError(errorData.message || "Failed to create method.");
       } else {
-        const data = await response.json();
-        setSuccess(data.message);
-        navigate("/methods");
+        const responseData = await response.json();
+        setSuccess(responseData.message || "Method created successfully.");
+        setTimeout(() => {
+          navigate("/methods");
+        }, 2000);
       }
     } catch (err) {
       console.error("An error occurred:", err);
       setError("An error occurred while creating the method.");
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return (

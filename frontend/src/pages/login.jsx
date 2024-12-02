@@ -55,6 +55,7 @@ const LoginPage = () => {
       <div style={{ padding: "1em" }}>
         <a href="/register">Don't have an account yet? Sign Up</a>
       </div>
+      <img src="/icons8-coffee-bean-64.png" alt="bean" />
     </div>
   );
 };

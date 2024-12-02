@@ -32,13 +32,26 @@ class RecipeRepository
   
 
   /**
-   * get metod by id
+   * get recipe by id
    * @param string $id
    */
   public function getDataById(string $id): ?Array {
-    $sql = "SELECT * 
-            FROM recipe 
-            WHERE id = '$id'
+    $sql = "SELECT 
+            rc.id, 
+            rc.name, 
+            rc.temperature, 
+            rc.water_amt, 
+            rc.coffee_amt, 
+            rc.description, 
+            rc.created_at, 
+            rc.modified_at, 
+            rc.created_by, 
+            rc.method AS method_id, 
+            mt.name AS method_name, 
+            mt.icon AS method_icon
+            FROM recipe rc 
+            LEFT JOIN method mt on rc.method = mt.id 
+            WHERE rc.id = '$id' 
             ";
     return $this->mssql_conn->fetchAllAssociative($sql);
   }

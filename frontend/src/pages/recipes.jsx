@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import RecipeCard from "../components/recipes/recipeCard";
+import { Link } from "react-router-dom";
 
 const RecipesPage = () => {
   const [recipes, setRecipes] = useState([]);
@@ -54,6 +55,10 @@ const RecipesPage = () => {
   return (
     <div>
       <h1>Recipes</h1>
+      <Link to="/new-recipe">
+        <button>+ Recipe</button>
+      </Link>
+
       {recipes.map((recipe) => (
         <RecipeCard key={recipe.id} recipe={recipe} />
       ))}

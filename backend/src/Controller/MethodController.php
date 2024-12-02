@@ -74,38 +74,44 @@ class MethodController extends AbstractController {
   #[IsGranted('ROLE_ADMIN')]
   #[Route('/add', name: 'create_method', methods: ['GET', 'POST'])]
   public function create(Request $request): JsonResponse {
-    $data = json_decode($request->getContent(), true);
     $errors = [];
 
-    if (!isset($data['name']) || trim($data['name']) === '') {
-      $errors['name'] = 'Name is required';
+    $name = $request->get('name');
+    if (!$name || trim($name) === '') {
+        $errors['name'] = 'Name is required';
     }
 
     $icon = $request->files->get('icon');
-    if (!$icon) {
-      $errors['icon'] = 'Icon is required.';
-    } elseif (!$icon->isValid()) {
-      $errors['icon'] = 'Invalid file upload.';
-    } elseif (!in_array($icon->getMimeType(), ['image/jpeg', 'image/png', 'image/webp'])) {
-      $errors['icon'] = 'Invalid file type. Only JPEG, PNG, or WebP are allowed.';
-    } elseif ($icon->getSize() > 2 * 1024 * 1024) {
-      $errors['icon'] = 'File size exceeds 2MB.';
+    if ($icon) {
+        if (!$icon->isValid()) {
+            $errors['icon'] = 'Invalid file upload.';
+        } elseif (!in_array($icon->getMimeType(), ['image/jpeg', 'image/png', 'image/webp'])) {
+            $errors['icon'] = 'Invalid file type. Only JPEG, PNG, or WebP are allowed.';
+        } elseif ($icon->getSize() > 2 * 1024 * 1024) {
+            $errors['icon'] = 'File size exceeds 2MB.';
+        }
     }
 
     if (!empty($errors)) {
-      return new JsonResponse([
-        'message' => 'Validation failed',
-        'errors' => $errors,
-      ], Response::HTTP_BAD_REQUEST);
+        return new JsonResponse([
+            'message' => 'Validation failed',
+            'errors' => $errors,
+        ], Response::HTTP_BAD_REQUEST);
     }
 
-    $uploadDir = $this->getParameter('upload_directory');
-    $fileName = uniqid() . '.' . $icon->guessExtension();
-    $icon->move($uploadDir, $fileName);
+    $iconPath = null;
+    if ($icon) {
+        $uploadDir = $this->getParameter('upload_directory');
+        $fileName = uniqid() . '.' . $icon->guessExtension();
+        $icon->move($uploadDir, $fileName);
+        $iconPath = '/uploads/' . $fileName;
+    }
 
     $method = new Method();
-    $method->setName($data['name']);
-    $method->setIcon('/uploads/' . $fileName); 
+    $method->setName($name);
+    if ($iconPath) {
+        $method->setIcon($iconPath);
+    }
 
     $this->entityManager->persist($method);
     $this->entityManager->flush();
@@ -118,8 +124,7 @@ class MethodController extends AbstractController {
             'icon' => $method->getIcon(),
         ],
     ], Response::HTTP_CREATED);
-
-  }
+}
 
   /**
   * Delete method based on ID

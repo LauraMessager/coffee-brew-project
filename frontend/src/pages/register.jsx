@@ -74,7 +74,7 @@ const RegisterPage = () => {
   return (
     <div className="register-page">
       <h1>Register</h1>
-      {successMessage && <div className="success-banner">{successMessage}</div>}
+      {/* {successMessage && <div className="success-banner">{successMessage}</div>} */}
       <RegisterForm
         onSubmit={handleRegister}
         errorMessage={errorMessage}

@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RecipePropTypes from "../../types/RecipePropTypes";
+import { Link } from "react-router-dom";
 import "../../styles/recipeCard.scss";
 
 const RecipeCard = ({ recipe, onDetailClick }) => {
-  const { name, temperature, water_amt, coffee_amt, method } = recipe;
+  const { id, name, temperature, water_amt, coffee_amt, method } = recipe;
 
   return (
     <div className="card">
@@ -16,8 +17,8 @@ const RecipeCard = ({ recipe, onDetailClick }) => {
           Water Amount: {water_amt ? `${water_amt}ml` : "N/A"} <br />
           Coffee Amount: {coffee_amt ? `${coffee_amt}g` : "N/A"}
         </p>
-        <button className="btn" onClick={onDetailClick}>
-          Details
+        <button>
+          <Link to={`/recipe/${id}`}> Details</Link>
         </button>
       </div>
     </div>

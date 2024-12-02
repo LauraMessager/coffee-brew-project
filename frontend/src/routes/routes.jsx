@@ -11,6 +11,8 @@ import BrewGuidePage from "../pages/brewGuide";
 import NewBrewGuidePage from "../pages/newBrewGuide";
 import ErrorPage from "../pages/error";
 import RegisterPage from "../pages/register";
+import NewRecipePage from "../pages/newRecipe";
+import RecipeDetailPage from "../pages/recipeDetail";
 // import ProtectedRoute from "../components/protectedRoute";
 
 export const router = createBrowserRouter([
@@ -71,6 +73,14 @@ export const router = createBrowserRouter([
     ),
   },
   {
+    path: "/new-brew-guide",
+    element: (
+      <Layout>
+        <NewBrewGuidePage />
+      </Layout>
+    ),
+  },
+  {
     path: "/recipes",
     element: (
       <Layout>
@@ -79,18 +89,26 @@ export const router = createBrowserRouter([
     ),
   },
   {
-    path: "/logout",
+    path: "/new-recipe",
     element: (
       <Layout>
-        <Logout />
+        <NewRecipePage />
       </Layout>
     ),
   },
   {
-    path: "/new-brew-guide",
+    path: "/recipe/:id",
     element: (
       <Layout>
-        <NewBrewGuidePage />
+        <RecipeDetailPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/logout",
+    element: (
+      <Layout>
+        <Logout />
       </Layout>
     ),
   },
