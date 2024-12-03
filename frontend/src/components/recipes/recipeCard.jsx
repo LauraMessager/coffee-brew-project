@@ -11,20 +11,24 @@ const RecipeCard = ({ recipe, onDetailClick }) => {
     <div className="card">
       <div className="card_content">
         <h2 className="card_title">{name}</h2>
-        {method && <div className="tag">{method.name}</div>}
+        {method && (
+          <div className="tag">{method.name ? `${method_name}` : "Coffee"}</div>
+        )}
         <p className="card_text">
-          Temperature: {temperature ? `${temperature}°C` : "N/A"} <br />
-          Water Amount: {water_amt ? `${water_amt}ml` : "N/A"} <br />
-          Coffee Amount: {coffee_amt ? `${coffee_amt}g` : "N/A"}
+          <strong>Temperature:</strong>{" "}
+          {temperature ? `${temperature}°C` : "N/A"} <br />
+          <strong> Water Amount:</strong> {water_amt ? `${water_amt}ml` : "N/A"}{" "}
+          <br />
+          <strong>Coffee Amount:</strong>{" "}
+          {coffee_amt ? `${coffee_amt}g` : "N/A"}
         </p>
-        <button>
-          <Link to={`/recipe/${id}`}> Details</Link>
-        </button>
+        <Link to={`/recipe/${id}`}>
+          <button>Details</button>
+        </Link>
       </div>
     </div>
   );
 };
-
 RecipeCard.propTypes = {
   recipe: RecipePropTypes.isRequired,
   onDetailClick: PropTypes.func.isRequired,

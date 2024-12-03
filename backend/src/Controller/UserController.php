@@ -127,9 +127,11 @@ class UserController
       $this->entityManager->flush();
       
       $roles = $user->getRoles();
+      $id = $user->getId();
       return new JsonResponse([
           'apiToken' => $apiToken,
-          'roles' => $roles
+          'roles' => $roles,
+          'id' => $id
       ], JsonResponse::HTTP_OK);
     }
 

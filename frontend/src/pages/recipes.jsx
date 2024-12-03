@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import RecipeCard from "../components/recipes/recipeCard";
+import RecipeCard from "../components/recipes/RecipeCard";
 import { Link } from "react-router-dom";
+import "../styles/RecipesPage.scss";
 
 const RecipesPage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user || !user.apiToken) {
+    const loggedUser = JSON.parse(localStorage.getItem("user"));
+    if (!loggedUser || !loggedUser.apiToken) {
       setError("User is not authenticated");
       setLoading(false);
       return;
     }
-
-    const apiToken = user.apiToken;
+    setUser(loggedUser);
+    const apiToken = loggedUser.apiToken;
 
     const fetchRecipes = async () => {
       try {
@@ -33,7 +34,15 @@ const RecipesPage = () => {
         }
 
         const data = await response.json();
-        setRecipes(data.datas);
+
+        const filteredRecipes = data.datas.filter((recipe) => {
+          if (loggedUser.id === 5) {
+            return true;
+          }
+          return recipe.created_by === loggedUser.id || recipe.created_by === 5;
+        });
+
+        setRecipes(filteredRecipes);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -53,15 +62,21 @@ const RecipesPage = () => {
   }
 
   return (
-    <div>
+    <div className="container">
       <h1>Recipes</h1>
       <Link to="/new-recipe">
         <button>+ Recipe</button>
       </Link>
 
-      {recipes.map((recipe) => (
-        <RecipeCard key={recipe.id} recipe={recipe} />
-      ))}
+      <div className="cards">
+        {recipes.length === 0 ? (
+          <p>No recipes found</p>
+        ) : (
+          recipes.map((recipe) => (
+            <RecipeCard key={recipe.id} recipe={recipe} />
+          ))
+        )}
+      </div>
     </div>
   );
 };

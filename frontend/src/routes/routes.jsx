@@ -13,6 +13,8 @@ import ErrorPage from "../pages/error";
 import RegisterPage from "../pages/register";
 import NewRecipePage from "../pages/newRecipe";
 import RecipeDetailPage from "../pages/recipeDetail";
+import TermPage from "../pages/termOfUse";
+import AboutPage from "../pages/about";
 // import ProtectedRoute from "../components/protectedRoute";
 
 export const router = createBrowserRouter([
@@ -109,6 +111,22 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <Logout />
+      </Layout>
+    ),
+  },
+  {
+    path: "/term-of-use",
+    element: (
+      <Layout>
+        <TermPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/about",
+    element: (
+      <Layout>
+        <AboutPage />
       </Layout>
     ),
   },

@@ -9,22 +9,10 @@
 }
 
 .cards {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
   list-style: none;
   margin: 0;
   padding: 0;
-
-  .cards_item {
-    padding: 1rem;
-    width: 100%;
-
-    @media (min-width: 40rem) {
-      width: 50%;
-    }
-
-    @media (min-width: 56rem) {
-      width: 33.3333%;
-    }
-  }
 }

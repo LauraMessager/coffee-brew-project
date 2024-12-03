@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
+    const storedUser = JSON.parse(localStorage.getItem("user"));
 
-    if (!user || !user.apiToken) {
+    if (!storedUser || !storedUser.apiToken) {
       setError("User is not authenticated");
       setLoading(false);
       return;
     }
 
-    const apiToken = user.apiToken;
+    setUser(storedUser);
 
     const fetchRecipeDetail = async () => {
       try {
@@ -25,7 +26,7 @@ const RecipeDetailPage = () => {
           {
             method: "GET",
             headers: {
-              "auth-token": apiToken,
+              "auth-token": storedUser.apiToken,
               "Content-Type": "application/json",
             },
           }
@@ -53,6 +54,32 @@ const RecipeDetailPage = () => {
 
     fetchRecipeDetail();
   }, [id]);
+
+  const handleDelete = async (recipeId) => {
+    if (window.confirm("Are you sure you want to delete this recipe?")) {
+      try {
+        const response = await fetch(
+          `http://localhost:8001/api/recipe/recipe/${recipeId}`,
+          {
+            method: "DELETE",
+            headers: {
+              "auth-token": user.apiToken,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error(`Failed to delete recipe: ${response.statusText}`);
+        }
+
+        alert("Recipe deleted successfully");
+        window.location.href = "/recipes";
+      } catch (err) {
+        alert(`Error: ${err.message}`);
+      }
+    }
+  };
 
   if (loading) {
     return <div>Loading recipe details...</div>;
@@ -96,6 +123,15 @@ const RecipeDetailPage = () => {
       <p>
         <strong>Description:</strong> {recipe.description}
       </p>
+
+      {user && recipe.created_by === user.id && (
+        <div>
+          <Link to={`/edit-recipe/${recipe.id}`}>
+            <button>Modify</button>
+          </Link>
+          <button onClick={() => handleDelete(recipe.id)}>Delete</button>
+        </div>
+      )}
     </div>
   );
 };

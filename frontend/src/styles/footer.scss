@@ -1,0 +1,35 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 20px;
+  border-top: 1px solid #e9ecef;
+  margin-top: 70px;
+
+  .section {
+    display: flex;
+    margin: 0 10px;
+    align-items: center;
+
+    a {
+      text-decoration: none;
+      color: #f25042;
+      padding: 5px 10px;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #343a40;
+      }
+    }
+
+    img {
+      max-height: 30px;
+      margin-left: 5px;
+    }
+    p {
+      margin: 0;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../components/navbar/navbar";
+import "../styles/mainpage.scss";
 
 const MainPage = () => {
   return (
     <div className="main-page">
       <div className="main-content">
-        <h1>Welcome to Coffee Brew</h1>
-        <p>Click the button below to start your caffeinated adventure</p>
+        <img src="/mainpage.png" alt="main" />
         <Link to="/login">
-          <button className="login-btn">Login</button>
+          <button className="login-btn">Explore</button>
         </Link>
       </div>
     </div>
