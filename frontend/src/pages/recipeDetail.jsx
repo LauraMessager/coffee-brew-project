@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import "../styles/recipeDetail.scss";
 
 const RecipeDetailPage = () => {
   const { id } = useParams();
@@ -97,10 +98,6 @@ const RecipeDetailPage = () => {
     <div>
       <h1>{recipe.name}</h1>
       <p>
-        <strong>Method:</strong> {recipe.method_name}
-      </p>
-      <p>
-        <strong>Icon:</strong>
         {recipe.method_icon ? (
           <img
             src={`http://localhost:8001/${recipe.method_icon}`}
@@ -108,28 +105,37 @@ const RecipeDetailPage = () => {
             style={{ width: "100px", height: "100px", objectFit: "contain" }}
           />
         ) : (
-          <span>No icon available</span>
+          <img src="icons8-coffee-bean-64.png" alt="coffee bean" />
         )}
       </p>
-      <p>
-        <strong>Temperature:</strong> {recipe.temperature}°C
-      </p>
-      <p>
-        <strong>Water Amount:</strong> {recipe.water_amt}ml
-      </p>
-      <p>
-        <strong>Coffee Amount:</strong> {recipe.coffee_amt}g
-      </p>
-      <p>
-        <strong>Description:</strong> {recipe.description}
-      </p>
+      <div className="data-container">
+        <p>
+          <span className="data_item tag">{recipe.method_name}</span>
+          <span className="data_item">
+            <img src="/icons8-température-50.png" alt="temperature" />
+            {recipe.temperature ? `${recipe.temperature}°C` : "N/A"}
+          </span>
+          <span className="data_item">
+            <img src="/icons8-eau-50.png" alt="waterdrop" />
+            {recipe.water_amt ? `${recipe.water_amt}ml` : "N/A"}
+          </span>
+          <span className="data_item">
+            <img src="/icons8-coffee-bean.png" alt="coffeebean" />
+            {recipe.coffee_amt ? `${recipe.coffee_amt}g` : "N/A"}
+          </span>
+        </p>
+      </div>
+      <div className="description-container">
+        <p>
+          <strong>Description:</strong> {recipe.description}
+        </p>
+      </div>
 
       {user && recipe.created_by === user.id && (
         <div>
-          <Link to={`/edit-recipe/${recipe.id}`}>
+          <Link to={`/recipe/update/${recipe.id}`}>
             <button>Modify</button>
           </Link>
-          <button onClick={() => handleDelete(recipe.id)}>Delete</button>
         </div>
       )}
     </div>

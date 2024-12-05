@@ -24,6 +24,7 @@ security:
     # No authentication required for register and login routes
     - { path: ^/api/user/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/api/recipe/list, roles: PUBLIC_ACCESS }
 
     # Secure the rest of the /api routes, require ROLE_USER
     - { path: ^/api, roles: ROLE_USER }

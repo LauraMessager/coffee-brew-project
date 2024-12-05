@@ -31,7 +31,7 @@ const LoginPage = () => {
         if (userData && userData.apiToken) {
           login(userData);
           navigate(
-            userData.roles.includes("ROLE_ADMIN") ? "/admin" : "/brew-guide"
+            userData.roles.includes("ROLE_ADMIN") ? "/admin" : "/recipes"
           );
         } else {
           setError("No valid roles found");

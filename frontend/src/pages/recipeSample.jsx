@@ -1,31 +1,20 @@
 import React, { useState, useEffect } from "react";
-import RecipeCard from "../components/recipes/RecipeCard";
-import { Link } from "react-router-dom";
+import RecipeSampleCard from "../components/recipes/recipeSampleCard";
 import "../styles/recipesPage.scss";
 import "../styles/recipeCard.scss";
+import { Link } from "react-router-dom";
 
-const RecipesPage = () => {
+const RecipeSamplePage = () => {
   const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const loggedUser = JSON.parse(localStorage.getItem("user"));
-    if (!loggedUser || !loggedUser.apiToken) {
-      setError("User is not authenticated");
-      setLoading(false);
-      return;
-    }
-    setUser(loggedUser);
-    const apiToken = loggedUser.apiToken;
-
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/recipe", {
+        const response = await fetch("http://localhost:8001/api/recipe/list", {
           method: "GET",
           headers: {
-            "auth-token": apiToken,
             "Content-Type": "application/json",
           },
         });
@@ -37,10 +26,7 @@ const RecipesPage = () => {
         const data = await response.json();
 
         const filteredRecipes = data.datas.filter((recipe) => {
-          if (loggedUser.id === 5) {
-            return true;
-          }
-          return recipe.created_by === loggedUser.id || recipe.created_by === 5;
+          return recipe.created_by === 5;
         });
 
         setRecipes(filteredRecipes);
@@ -65,16 +51,18 @@ const RecipesPage = () => {
   return (
     <div className="recipes-page">
       <h1>Recipes</h1>
-      <Link to="/new-recipe">
-        <button>+ Recipe</button>
-      </Link>
+      <p>See below a sample of the recipes available on our platform.</p>
+      <p>Login and start creating your own recipes.</p>
 
+      <Link to="/login">
+        <button>Create your own</button>
+      </Link>
       <div className="cards">
         {recipes.length === 0 ? (
           <p>No recipes found</p>
         ) : (
           recipes.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
+            <RecipeSampleCard key={recipe.id} recipe={recipe} />
           ))
         )}
       </div>
@@ -82,4 +70,4 @@ const RecipesPage = () => {
   );
 };
 
-export default RecipesPage;
+export default RecipeSamplePage;

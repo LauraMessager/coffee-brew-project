@@ -12,7 +12,7 @@ const Logout = () => {
     const logoutUser = async () => {
       try {
         logout();
-        navigate("/login");
+        navigate("/");
       } catch (error) {
         setError("An error occurred while logging out. Please try again.");
       } finally {

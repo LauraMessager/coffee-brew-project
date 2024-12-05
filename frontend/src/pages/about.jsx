@@ -3,6 +3,11 @@ import React from "react";
 const AboutPage = () => {
   return (
     <div style={pageStyle}>
+      <div style={imgContainerStyle}>
+        <img style={imgStyle} src="/CoffeeBrewLogo.png" alt="coffebrew" />
+        <strong style={spanStyle}>&nbsp;&nbsp;X&nbsp;&nbsp;</strong>
+        <img style={imgStyle} src="/SCALogo.png" alt="scacoffee" />
+      </div>
       <h1>About SCA</h1>
       <p>
         The Specialty Coffee Association (SCA) is a trade association built on
@@ -18,26 +23,22 @@ const AboutPage = () => {
         nurturing for all, the SCA draws on years of insights and inspiration
         from the specialty coffee community.
       </p>
-
       <h2>Our Purpose</h2>
       <p>
         The SCA will foster a global coffee community and support activity to
         make specialty coffee a thriving, equitable, and sustainable activity
         for the entire value chain.
       </p>
-
       <h2>Our Vision</h2>
       <p>
         To create an effective, authentic, and dynamic organization to give
         voice and substance to the possibilities for specialty coffee worldwide.
       </p>
-
       <h2>Our Mission</h2>
       <p>
         Engage, inspire, and expand a sustainable global specialty coffee
         community through leadership in events, education, and research.
       </p>
-
       <h2>About the Specialty Coffee Movement</h2>
       <p>
         The specialty coffee world attracts more and more coffee enthusiasts
@@ -73,9 +74,29 @@ const AboutPage = () => {
 };
 
 const pageStyle = {
-  fontFamily: "Arial, sans-serif",
+  fontFamily: "Roboto, sans-serif",
   padding: "20px",
   lineHeight: "1.6",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
+};
+
+const imgContainerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  gap: "10px",
+};
+const imgStyle = {
+  height: "150px",
+  marginBottom: "5px",
+};
+
+const spanStyle = {
+  color: "#f25042",
+  fontSize: "34px",
 };
 
 export default AboutPage;

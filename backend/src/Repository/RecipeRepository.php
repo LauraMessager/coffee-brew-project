@@ -30,6 +30,17 @@ class RecipeRepository
     return $this->mssql_conn->fetchAllAssociative($sql);
   }
   
+  /**
+   * get sample data
+   */
+  public function getSampleData(): ?Array {
+    $sql = "SELECT * 
+            FROM recipe
+            WHERE created_by=5
+            ";
+    return $this->mssql_conn->fetchAllAssociative($sql);
+  }
+  
 
   /**
    * get recipe by id

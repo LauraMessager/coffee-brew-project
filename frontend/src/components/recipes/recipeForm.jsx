@@ -50,7 +50,6 @@ const RecipeForm = ({
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Automatically include the user's info in the payload
     const finalFormData = {
       ...formData,
       created_by: {

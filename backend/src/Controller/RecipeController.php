@@ -30,6 +30,23 @@ class RecipeController extends AbstractController {
     $this->recipeCrudRepository = $recipeCrudRepository;
   }
 
+
+  /**
+  * Get a sample of existing recipes
+  * @return JsonResponse
+  */
+  #[Route('/list', name: 'recipes-list')]
+  public function sampleList(): JsonResponse {
+    $datas = $this->recipeRepository->getSampleData();
+    return new JsonResponse(
+      [
+        'datas' => $datas,
+      ],
+      200
+    );
+  }
+
+  
   /**
   * Get all the existing recipes
   * @return JsonResponse
@@ -46,6 +63,8 @@ class RecipeController extends AbstractController {
       200
     );
   }
+
+
 
   
   /**
@@ -133,7 +152,7 @@ class RecipeController extends AbstractController {
 
   
     /**
-    * Update existing brew guide based on ID
+    * Update existing recipe based on ID
     * @return JsonResponse
     * @param Request $request
     */
@@ -181,6 +200,33 @@ class RecipeController extends AbstractController {
         }
         $recipe->setMethod($method);
       }
+      if (isset($data['water_amt'])) {
+        if (!is_numeric($data['water_amt'])) {
+          return new JsonResponse([
+            'message' => 'Water amount must be a valid number',
+          ], Response::HTTP_BAD_REQUEST);
+        }
+        $recipe->setWaterAmt($data['water_amt']);
+    }
+
+    if (isset($data['coffee_amt'])) {
+        if (!is_numeric($data['coffee_amt'])) {
+          return new JsonResponse([
+            'message' => 'Coffee amount must be a valid number',
+          ], Response::HTTP_BAD_REQUEST);
+        }
+        $recipe->setCoffeeAmt($data['coffee_amt']);
+    }
+
+    if (isset($data['temperature'])) {
+        if (!is_numeric($data['temperature'])) {
+          return new JsonResponse([
+            'message' => 'Temperature must be a valid number',
+          ], Response::HTTP_BAD_REQUEST);
+        }
+        $recipe->setTemperature($data['temperature']);
+    }
+
 
       $this->entityManager->flush();
 
@@ -191,6 +237,9 @@ class RecipeController extends AbstractController {
           'name' => $recipe->getName(),
           'description' => $recipe->getDescription(),
           'method' => $recipe->getMethod() ? $recipe->getMethod()->getId() : null,
+          'water_amt' => $recipe->getWaterAmt(),
+          'coffee_amt' => $recipe->getCoffeeAmt(),
+          'temperature' => $recipe->getTemperature(),
         ],
       ], Response::HTTP_OK);
     }

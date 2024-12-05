@@ -15,7 +15,8 @@ import NewRecipePage from "../pages/newRecipe";
 import RecipeDetailPage from "../pages/recipeDetail";
 import TermPage from "../pages/termOfUse";
 import AboutPage from "../pages/about";
-// import ProtectedRoute from "../components/protectedRoute";
+import RecipeUpdate from "../pages/recipeUpdate";
+import RecipeSamplePage from "../pages/recipeSample";
 
 export const router = createBrowserRouter([
   {
@@ -103,6 +104,22 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <RecipeDetailPage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/recipe/update/:id",
+    element: (
+      <Layout>
+        <RecipeUpdate />
+      </Layout>
+    ),
+  },
+  {
+    path: "/recipes-list",
+    element: (
+      <Layout>
+        <RecipeSamplePage />
       </Layout>
     ),
   },

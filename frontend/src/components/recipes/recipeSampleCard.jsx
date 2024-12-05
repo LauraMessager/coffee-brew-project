@@ -1,10 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RecipePropTypes from "../../types/RecipePropTypes";
-import { Link } from "react-router-dom";
 import "../../styles/recipeCard.scss";
 
-const RecipeCard = ({ recipe, onDetailClick }) => {
+const RecipeSampleCard = ({ recipe, onDetailClick }) => {
   const { id, name, temperature, water_amt, coffee_amt, method } = recipe;
 
   return (
@@ -28,16 +27,13 @@ const RecipeCard = ({ recipe, onDetailClick }) => {
             {coffee_amt ? `${coffee_amt}g` : "N/A"}
           </span>
         </p>
-        <Link to={`/recipe/${id}`}>
-          <button className="btn">Details</button>
-        </Link>
       </div>
     </div>
   );
 };
-RecipeCard.propTypes = {
+RecipeSampleCard.propTypes = {
   recipe: RecipePropTypes.isRequired,
   onDetailClick: PropTypes.func.isRequired,
 };
 
-export default RecipeCard;
+export default RecipeSampleCard;

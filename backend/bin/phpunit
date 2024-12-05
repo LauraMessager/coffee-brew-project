@@ -6,7 +6,7 @@ if (!ini_get('date.timezone')) {
 }
 
 if (is_file(dirname(__DIR__).'/vendor/phpunit/phpunit/phpunit')) {
-    if (PHP_VERSION_ID >= 80000) {
+    if (PHP_VERSION_ID >= 80010) {
         require dirname(__DIR__).'/vendor/phpunit/phpunit/phpunit';
     } else {
         define('PHPUNIT_COMPOSER_INSTALL', dirname(__DIR__).'/vendor/autoload.php');

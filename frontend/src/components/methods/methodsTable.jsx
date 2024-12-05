@@ -29,7 +29,7 @@ const MethodTable = ({ methods }) => {
                 <td>
                   {method.icon && (
                     <img
-                      src={method.icon}
+                      src={`http://localhost:8001/${method.icon}`}
                       alt={`${method.name} icon`}
                       style={{
                         width: "40px",
