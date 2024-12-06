@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import "../../styles/loginForm.scss";
+import "../../styles/recipeForm.scss";
 
 const RecipeForm = ({
   onSubmit,
@@ -75,36 +75,59 @@ const RecipeForm = ({
           required
         />
       </div>
-      <div className="form-group">
-        <label htmlFor="temperature">Temperature (°C)</label>
-        <input
-          type="number"
-          id="temperature"
-          name="temperature"
-          value={formData.temperature}
-          onChange={handleChange}
-        />
+
+      <div className="form-group no-border">
+        <label htmlFor="method">Choice of Method</label>
+        <select
+          id="method"
+          name="method"
+          value={formData.method.id}
+          onChange={handleMethodChange}
+        >
+          <option value="">Select a method</option>
+          {availableMethods.map((method) => (
+            <option key={method.id} value={method.id}>
+              {method.name}
+            </option>
+          ))}
+        </select>
       </div>
-      <div className="form-group">
-        <label htmlFor="water_amt">Water Amount (ml)</label>
-        <input
-          type="number"
-          id="water_amt"
-          name="water_amt"
-          value={formData.water_amt}
-          onChange={handleChange}
-        />
+
+      <div className="form-group-row">
+        <div className="form-group small">
+          <label htmlFor="temperature">Temp (°C)</label>
+          <input
+            type="number"
+            id="temperature"
+            name="temperature"
+            value={formData.temperature}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group small">
+          <label htmlFor="coffee_amt">Coffee (g)</label>
+          <input
+            type="number"
+            id="coffee_amt"
+            name="coffee_amt"
+            value={formData.coffee_amt}
+            onChange={handleChange}
+          />
+        </div>
+
+        <div className="form-group small">
+          <label htmlFor="water_amt">Water (ml)</label>
+          <input
+            type="number"
+            id="water_amt"
+            name="water_amt"
+            value={formData.water_amt}
+            onChange={handleChange}
+          />
+        </div>
       </div>
-      <div className="form-group">
-        <label htmlFor="coffee_amt">Coffee Amount (g)</label>
-        <input
-          type="number"
-          id="coffee_amt"
-          name="coffee_amt"
-          value={formData.coffee_amt}
-          onChange={handleChange}
-        />
-      </div>
+
       <div className="form-group">
         <label htmlFor="description">Description</label>
         <textarea
@@ -114,25 +137,7 @@ const RecipeForm = ({
           onChange={handleChange}
         ></textarea>
       </div>
-      <fieldset>
-        <legend>Method</legend>
-        <div className="form-group">
-          <label htmlFor="method">Select Method</label>
-          <select
-            id="method"
-            name="method"
-            value={formData.method.id}
-            onChange={handleMethodChange}
-          >
-            <option value="">Select a method</option>
-            {availableMethods.map((method) => (
-              <option key={method.id} value={method.id}>
-                {method.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      </fieldset>
+
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       <button type="submit" disabled={loading}>
         {loading ? "Saving..." : "Save Recipe"}

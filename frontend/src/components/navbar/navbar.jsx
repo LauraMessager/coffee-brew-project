@@ -31,7 +31,9 @@ function Navbar() {
       <label htmlFor="hamburger-input" className="navbar__label">
         <span>&#9776;</span>
       </label>
-      <img src="/CoffeeBrewLogo.png" alt="Logo" />
+      <Link to="/">
+        <img src="/CoffeeBrewLogo.png" alt="Logo" />
+      </Link>
       <input
         type="checkbox"
         id="hamburger-input"
@@ -42,6 +44,12 @@ function Navbar() {
         <ul>
           {!user && (
             <>
+              <li>
+                <Link to="/recipes-list">Recipes</Link>
+              </li>
+              <li>
+                <Link to="/ratio">Ratio</Link>
+              </li>
               <li>
                 <Link to="/login">Login</Link>
               </li>
@@ -57,6 +65,9 @@ function Navbar() {
               </li>
               <li>
                 <Link to="/brew-guide">Brew Guide</Link>
+              </li>
+              <li>
+                <Link to="/ratio">Ratio</Link>
               </li>
 
               {Array.isArray(user.roles) &&

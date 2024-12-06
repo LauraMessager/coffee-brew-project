@@ -19,7 +19,7 @@ const MainPage = () => {
     <div className="main-page">
       <div className="main-content">
         <img src="/mainpage.png" alt="main" />
-        <button className="login-btn" onClick={handleExploreClick}>
+        <button className="explore-btn" onClick={handleExploreClick}>
           Explore
         </button>
       </div>

@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import RecipeForm from "../components/recipes/recipeForm";
+import { useNavigate } from "react-router-dom";
 
 const NewRecipePage = () => {
   const [methods, setMethods] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const loggedInUser = JSON.parse(localStorage.getItem("user"));
@@ -73,7 +75,7 @@ const NewRecipePage = () => {
         throw new Error("Failed to create recipe");
       }
 
-      alert("Recipe created successfully!");
+      navigate("/recipes");
     } catch (error) {
       setError(error.message);
     } finally {

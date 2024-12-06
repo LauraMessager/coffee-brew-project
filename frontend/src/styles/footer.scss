@@ -1,10 +1,16 @@
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 20px;
   border-top: 1px solid #e9ecef;
-  margin-top: 70px;
+  margin-top: auto;
 
   .section {
     display: flex;
@@ -26,6 +32,7 @@ footer {
       max-height: 30px;
       margin-left: 5px;
     }
+
     p {
       margin: 0;
       display: flex;

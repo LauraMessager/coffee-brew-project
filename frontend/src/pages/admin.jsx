@@ -3,6 +3,7 @@ import BrewGuideTable from "../components/brewGuides/brewGuideTable";
 import MethodTable from "../components/methods/methodsTable";
 import UserTable from "../components/users/userTable";
 import { Link } from "react-router-dom";
+import "../styles/admin.scss";
 
 const Admin = () => {
   const [brewGuides, setBrewGuides] = useState([]);
@@ -113,10 +114,10 @@ const Admin = () => {
 
       <div>
         <Link to="/methods">
-          <button>+ Method</button>
+          <button className="adm-btn">+ Method</button>
         </Link>
         <Link to="/new-brew-guide">
-          <button>+ Brew Guide</button>
+          <button className="adm-btn">+ Brew Guide</button>
         </Link>
       </div>
 

@@ -17,6 +17,7 @@ import TermPage from "../pages/termOfUse";
 import AboutPage from "../pages/about";
 import RecipeUpdate from "../pages/recipeUpdate";
 import RecipeSamplePage from "../pages/recipeSample";
+import RatioConverter from "../pages/ratio";
 
 export const router = createBrowserRouter([
   {
@@ -120,6 +121,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <RecipeSamplePage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/ratio",
+    element: (
+      <Layout>
+        <RatioConverter />
       </Layout>
     ),
   },

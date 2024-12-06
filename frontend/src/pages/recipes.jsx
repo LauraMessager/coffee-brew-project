@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import RecipeCard from "../components/recipes/RecipeCard";
 import { Link } from "react-router-dom";
 import "../styles/recipesPage.scss";
-import "../styles/recipeCard.scss";
+//import "../styles/recipeCard.scss";
 
 const RecipesPage = () => {
   const [recipes, setRecipes] = useState([]);
