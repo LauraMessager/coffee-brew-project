@@ -40,9 +40,7 @@ const NewBrewGuidePage = () => {
 
       const responseData = await response.json();
       setSuccessMessage("Brew Guide successfully added!");
-      setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
+      navigate(`/admin`);
     } catch (error) {
       setError(
         error.message || "An error occurred while adding the brew guide."

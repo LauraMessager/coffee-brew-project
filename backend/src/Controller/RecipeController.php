@@ -243,4 +243,25 @@ class RecipeController extends AbstractController {
         ],
       ], Response::HTTP_OK);
     }
+
+
+    /**
+     * Delete an existing recipe based on ID
+     * @param int $id
+     * @return JsonResponse
+     */
+    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
+    #[Route('/{id}/delete', name: 'delete_recipe', methods: ['DELETE'])]
+    public function delete(int $id): JsonResponse {
+        $recipe = $this->recipeCrudRepository->findById($id);
+        if (!$recipe) {
+            return new JsonResponse(['message' => 'Recipe not found'], Response::HTTP_NOT_FOUND);
+        }
+
+        $this->entityManager->remove($recipe);
+        $this->entityManager->flush();
+
+        return new JsonResponse(['message' => 'Recipe deleted successfully!'], Response::HTTP_OK);
+    }
 }

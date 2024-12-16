@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
+import RecipeDelete from "../components/recipes/recipeDelete";
 import "../styles/recipeDetail.scss";
 
 const RecipeDetailPage = () => {
@@ -56,30 +57,8 @@ const RecipeDetailPage = () => {
     fetchRecipeDetail();
   }, [id]);
 
-  const handleDelete = async (recipeId) => {
-    if (window.confirm("Are you sure you want to delete this recipe?")) {
-      try {
-        const response = await fetch(
-          `http://localhost:8001/api/recipe/recipe/${recipeId}`,
-          {
-            method: "DELETE",
-            headers: {
-              "auth-token": user.apiToken,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-
-        if (!response.ok) {
-          throw new Error(`Failed to delete recipe: ${response.statusText}`);
-        }
-
-        alert("Recipe deleted successfully");
-        window.location.href = "/recipes";
-      } catch (err) {
-        alert(`Error: ${err.message}`);
-      }
-    }
+  const handleDeleteSuccess = () => {
+    window.location.href = "/recipes";
   };
 
   if (loading) {
@@ -136,6 +115,7 @@ const RecipeDetailPage = () => {
           <Link to={`/recipe/update/${recipe.id}`}>
             <button>Modify</button>
           </Link>
+          <RecipeDelete id={recipe.id} onDeleteSuccess={handleDeleteSuccess} />
         </div>
       )}
     </div>

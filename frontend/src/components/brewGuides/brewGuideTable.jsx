@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import BrewGuideDelete from "./brewGuideDelete";
+import { Link } from "react-router-dom";
 
 const BrewGuideTable = ({ brewGuides }) => {
   const [successMessage, setSuccessMessage] = useState(null);
@@ -18,7 +19,8 @@ const BrewGuideTable = ({ brewGuides }) => {
             <th>Title</th>
             <th>Description</th>
             <th>Created By</th>
-            <th>Action</th>
+            <th>Delete</th>
+            <th>Modify</th>
           </tr>
         </thead>
         <tbody>
@@ -32,6 +34,11 @@ const BrewGuideTable = ({ brewGuides }) => {
                   id={guide.id}
                   onDeleteSuccess={handleDeleteSuccess}
                 />
+              </td>
+              <td>
+                <Link to={`/brew-guide/update/${guide.id}`}>
+                  <button className="edit-button">Modify</button>
+                </Link>
               </td>
             </tr>
           ))}

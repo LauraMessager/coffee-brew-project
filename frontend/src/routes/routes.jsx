@@ -18,6 +18,7 @@ import AboutPage from "../pages/about";
 import RecipeUpdate from "../pages/recipeUpdate";
 import RecipeSamplePage from "../pages/recipeSample";
 import RatioConverter from "../pages/ratio";
+import BrewGuideUpdate from "../components/brewGuides/brewGuideUpdate";
 
 export const router = createBrowserRouter([
   {
@@ -81,6 +82,14 @@ export const router = createBrowserRouter([
     element: (
       <Layout>
         <NewBrewGuidePage />
+      </Layout>
+    ),
+  },
+  {
+    path: "/brew-guide/update/:id",
+    element: (
+      <Layout>
+        <BrewGuideUpdate />
       </Layout>
     ),
   },

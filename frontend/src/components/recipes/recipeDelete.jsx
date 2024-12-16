@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/brewGuideForm.scss";
 
-const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
+const RecipeDelete = ({ id, onDeleteSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8001/api/brew_guide/delete/${id}`,
+        `http://localhost:8001/api/recipe/${id}/delete`,
         {
           method: "DELETE",
           headers: {
@@ -31,19 +30,17 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to delete brew guide");
+        throw new Error("Failed to delete recipe");
       }
 
       const data = await response.json();
-      console.log(`Deleting brew guide with ID: ${id}`);
+      console.log(`Deleting recipe with ID: ${id}`);
 
       onDeleteSuccess(id);
 
-      navigate("/admin");
+      navigate("/recipes");
     } catch (error) {
-      setError(
-        error.message || "An error occurred while deleting the brew guide."
-      );
+      setError(error.message || "An error occurred while deleting the recipe.");
     } finally {
       setLoading(false);
     }
@@ -51,16 +48,12 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
 
   return (
     <div>
-      <button
-        onClick={handleDelete}
-        className="btn delete-x"
-        disabled={loading}
-      >
-        {loading ? "Deleting..." : "X"}
+      <button onClick={handleDelete} className="btn" disabled={loading}>
+        {loading ? "Deleting..." : "Delete"}
       </button>
       {error && <div className="error-message">{error}</div>}
     </div>
   );
 };
 
-export default BrewGuideDelete;
+export default RecipeDelete;
