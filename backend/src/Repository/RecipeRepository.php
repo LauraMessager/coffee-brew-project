@@ -24,8 +24,19 @@ class RecipeRepository
   }
 
   public function getData(): ?Array {
-    $sql = "SELECT * 
-            FROM recipe
+    $sql = "SELECT r.id, 
+            r.name, 
+            r.temperature, 
+            r.water_amt, 
+            r.coffee_amt, 
+            r.description, 
+            r.created_at, 
+            r.modified_at, 
+            r.created_by, 
+            r.method, 
+            m.name as method_name
+            FROM recipe r
+            LEFT JOIN method m ON method=m.id;
             ";
     return $this->mssql_conn->fetchAllAssociative($sql);
   }

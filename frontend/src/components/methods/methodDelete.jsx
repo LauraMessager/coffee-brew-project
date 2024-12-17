@@ -35,8 +35,6 @@ const MethodDelete = ({ id, onDeleteSuccess }) => {
       }
 
       const data = await response.json();
-      console.log(`Deleting method with ID: ${id}`);
-
       onDeleteSuccess(data.message);
       setTimeout(() => {
         navigate("/admin");

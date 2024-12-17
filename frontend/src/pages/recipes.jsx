@@ -42,7 +42,6 @@ const RecipesPage = () => {
           }
           return recipe.created_by === loggedUser.id || recipe.created_by === 5;
         });
-
         setRecipes(filteredRecipes);
       } catch (err) {
         setError(err.message);

@@ -51,7 +51,7 @@ const NewBrewGuidePage = () => {
   };
 
   return (
-    <div className="new-brew-guide-page">
+    <div>
       <h1>Add New Brew Guide</h1>
       <BrewGuideForm
         onSubmit={handleFormSubmit}

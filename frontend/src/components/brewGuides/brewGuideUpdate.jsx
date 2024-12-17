@@ -39,7 +39,6 @@ const BrewGuideUpdate = () => {
           throw new Error("Failed to fetch brew guide");
         }
         const data = await response.json();
-        console.log(data);
         if (data.datas && data.datas.length > 0) {
           setBrewGuide(data.datas[0]);
         } else {

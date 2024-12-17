@@ -111,11 +111,19 @@ const RecipeDetailPage = () => {
       </div>
 
       {user && recipe.created_by === user.id && (
-        <div>
+        <div className="button-container">
           <Link to={`/recipe/update/${recipe.id}`}>
-            <button>Modify</button>
+            <button className="btn modify">Modify</button>
           </Link>
-          <RecipeDelete id={recipe.id} onDeleteSuccess={handleDeleteSuccess} />
+          <RecipeDelete
+            id={recipe.id}
+            onDeleteSuccess={handleDeleteSuccess}
+            render={(handleDelete) => (
+              <button className="btn delete" onClick={handleDelete}>
+                Delete
+              </button>
+            )}
+          />
         </div>
       )}
     </div>

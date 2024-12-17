@@ -35,7 +35,6 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
       }
 
       const data = await response.json();
-      console.log(`Deleting brew guide with ID: ${id}`);
 
       onDeleteSuccess(id);
 

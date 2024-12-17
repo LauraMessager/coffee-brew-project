@@ -10,7 +10,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Repository\MethodRepository;
 use App\Repository\MethodCrudRepository;
-// use App\Repository\RecipeRepository;
 use App\Repository\RecipeCrudRepository;
 use App\Entity\Method;
 
@@ -20,7 +19,6 @@ class MethodController extends AbstractController {
 
   private MethodRepository $methodRepository;
   private MethodCrudRepository $methodCrudRepository;
-  // private RecipeRepository $recipeRepository;
   private RecipeCrudRepository $recipeCrudRepository;
   private EntityManagerInterface $entityManager; 
 

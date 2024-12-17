@@ -34,7 +34,6 @@ const RecipeDelete = ({ id, onDeleteSuccess }) => {
       }
 
       const data = await response.json();
-      console.log(`Deleting recipe with ID: ${id}`);
 
       onDeleteSuccess(id);
 

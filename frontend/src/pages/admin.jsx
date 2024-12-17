@@ -1,4 +1,3 @@
-// Admin.js
 import React, { useState, useEffect } from "react";
 import BrewGuideTable from "../components/brewGuides/brewGuideTable";
 import MethodTable from "../components/methods/methodsTable";
