@@ -5,15 +5,13 @@ import { Link } from "react-router-dom";
 import "../../styles/recipeCard.scss";
 
 const RecipeCard = ({ recipe, onDetailClick }) => {
-  const { id, name, temperature, water_amt, coffee_amt, method } = recipe;
+  const { id, name, temperature, water_amt, coffee_amt, method_name } = recipe;
 
   return (
     <div className="card">
       <div className="card_content">
         <h2 className="card_title">{name}</h2>
-        {method && (
-          <div className="tag">{method.name ? method.name : "Coffee"}</div>
-        )}
+        <div className="tag">{method_name ? `${method_name}` : "Any"}</div>
         <p className="card_text">
           <span className="data_item">
             <img src="/icons8-température-50.png" alt="temperature" />

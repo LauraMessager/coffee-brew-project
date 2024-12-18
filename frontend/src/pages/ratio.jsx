@@ -47,7 +47,7 @@ const RatioConverter = () => {
     <div className="ratio-converter">
       <h1>Ratio Converter</h1>
       <div className="form-group">
-        <label>Ratio (e.g., 1:16): </label>
+        <label>Ratio (1:16): </label>
         <input
           type="number"
           value={ratio}

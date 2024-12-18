@@ -4,6 +4,7 @@ import MethodTable from "../components/methods/methodsTable";
 import UserTable from "../components/users/userTable";
 import { Link } from "react-router-dom";
 import "../styles/admin.scss";
+import BrewGuideDelete from "../components/brewGuides/brewGuideDelete";
 
 const Admin = () => {
   const [brewGuides, setBrewGuides] = useState([]);
@@ -38,7 +39,6 @@ const Admin = () => {
         }
 
         const data = await response.json();
-
         setBrewGuides(Array.isArray(data.datas) ? data.datas : []);
       } catch (error) {
         setError(error.message || "Failed to fetch brew guides");
@@ -62,7 +62,6 @@ const Admin = () => {
         }
 
         const data = await response.json();
-
         setMethods(Array.isArray(data.datas) ? data.datas : []);
       } catch (error) {
         setError(error.message || "Failed to fetch methods");
@@ -99,6 +98,12 @@ const Admin = () => {
     fetchUsers();
   }, []);
 
+  const handleDeleteSuccess = (id) => {
+    setBrewGuides((prevBrewGuides) =>
+      prevBrewGuides.filter((brewGuide) => brewGuide._id !== id)
+    );
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -110,7 +115,7 @@ const Admin = () => {
   return (
     <div className="admin-page">
       <h1>Welcome to the Admin Dashboard</h1>
-      <p>Below add, update and delete you website content </p>
+      <p>Below add, update and delete your website content</p>
 
       <div>
         <Link to="/methods">
@@ -122,7 +127,12 @@ const Admin = () => {
       </div>
 
       <div className="brew-guides-section">
-        <BrewGuideTable brewGuides={brewGuides} />
+        <BrewGuideTable
+          brewGuides={brewGuides}
+          renderDeleteButton={(id) => (
+            <BrewGuideDelete id={id} onDeleteSuccess={handleDeleteSuccess} />
+          )}
+        />
       </div>
       <div className="brew-guides-section">
         <MethodTable methods={methods} />

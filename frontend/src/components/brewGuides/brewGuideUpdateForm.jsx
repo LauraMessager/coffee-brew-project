@@ -1,22 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../styles/brewGuideForm.scss";
 
-const BrewGuideForm = ({ onSubmit, errorMessage, successMessage, loading }) => {
+const BrewGuideUpdateForm = ({
+  onSubmit,
+  errorMessage,
+  successMessage,
+  loading,
+  initialData,
+}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title || "");
+      setDescription(initialData.description || "");
+    }
+  }, [initialData]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("description", description);
-
-    onSubmit(formData);
+    const updatedBrewGuide = {
+      title,
+      description,
+    };
+    onSubmit(updatedBrewGuide);
   };
 
   return (
     <form onSubmit={handleSubmit} className="brew-guide-form">
-      <h2>Add New Brew Guide</h2>
+      <h2>Update Brew Guide</h2>
 
       {errorMessage && <div className="error-message">{errorMessage}</div>}
 
@@ -45,10 +58,10 @@ const BrewGuideForm = ({ onSubmit, errorMessage, successMessage, loading }) => {
       </div>
 
       <button type="submit" disabled={loading}>
-        {loading ? "Submitting..." : "Add Brew Guide"}
+        {loading ? "Submitting..." : "Update Brew Guide"}
       </button>
     </form>
   );
 };
 
-export default BrewGuideForm;
+export default BrewGuideUpdateForm;

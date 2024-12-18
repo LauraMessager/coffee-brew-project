@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../styles/brewGuideForm.scss";
 
-const MethodDelete = ({ id, onDeleteSuccess }) => {
+const RecipeDelete = ({ id, onDeleteSuccess }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -20,7 +19,7 @@ const MethodDelete = ({ id, onDeleteSuccess }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8001/api/method/delete/${id}`,
+        `http://localhost:8001/api/recipe/${id}/delete`,
         {
           method: "DELETE",
           headers: {
@@ -31,16 +30,16 @@ const MethodDelete = ({ id, onDeleteSuccess }) => {
       );
 
       if (!response.ok) {
-        throw new Error("Failed to delete method");
+        throw new Error("Failed to delete recipe");
       }
 
       const data = await response.json();
-      onDeleteSuccess(data.message);
-      setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
+
+      onDeleteSuccess(id);
+
+      navigate("/recipes");
     } catch (error) {
-      setError(error.message || "An error occurred while deleting the method.");
+      setError(error.message || "An error occurred while deleting the recipe.");
     } finally {
       setLoading(false);
     }
@@ -48,16 +47,12 @@ const MethodDelete = ({ id, onDeleteSuccess }) => {
 
   return (
     <div>
-      <button
-        onClick={handleDelete}
-        className="btn delete-x"
-        disabled={loading}
-      >
-        {loading ? "Deleting..." : "X"}
+      <button onClick={handleDelete} className="btn" disabled={loading}>
+        {loading ? "Deleting..." : "Delete"}
       </button>
       {error && <div className="error-message">{error}</div>}
     </div>
   );
 };
 
-export default MethodDelete;
+export default RecipeDelete;

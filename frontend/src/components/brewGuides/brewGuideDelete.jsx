@@ -35,12 +35,10 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
       }
 
       const data = await response.json();
-      console.log(`Deleting brew guide with ID: ${id}`);
 
-      onDeleteSuccess(data.message);
-      setTimeout(() => {
-        navigate("/admin");
-      }, 2000);
+      onDeleteSuccess(id);
+
+      navigate("/admin");
     } catch (error) {
       setError(
         error.message || "An error occurred while deleting the brew guide."

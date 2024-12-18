@@ -43,7 +43,7 @@ strong {
 
 .tag {
   font-family: "Roboto", sans-serif;
-  background-color: #8c7851;
+  background-color: #7e6d49;
   font-size: 0.9rem;
   color: #ffffff;
   border-radius: 1.25rem;
@@ -55,4 +55,27 @@ strong {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.button-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.btn {
+  padding: 0.5rem 1rem;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(242, 80, 66, 0.7);
+  width: auto;
+}
+
+.btn:hover {
+  background-color: #f25042;
 }

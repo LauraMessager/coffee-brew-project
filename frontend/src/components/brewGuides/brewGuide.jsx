@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import "../../styles/brewGuide.scss";
 
 const BrewGuide = ({ title, description, created_by }) => {
   return (

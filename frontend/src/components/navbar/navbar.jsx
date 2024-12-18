@@ -1,29 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/navbar.scss";
+import { AuthContext } from "../../context/AuthContext";
 
 function Navbar() {
-  const [user, setUser] = useState(null);
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem("user"));
-    setUser(storedUser);
-
-    const handleStorageChange = () => {
-      const updatedUser = JSON.parse(localStorage.getItem("user"));
-      setUser(updatedUser);
-    };
-
-    window.addEventListener("storage", handleStorageChange);
-
-    return () => {
-      window.removeEventListener("storage", handleStorageChange);
-    };
-  }, []);
-
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout();
+    navigate("/login");
   };
 
   return (
@@ -75,10 +62,10 @@ function Navbar() {
                   if (role === "ROLE_ADMIN") {
                     return (
                       <React.Fragment key={`admin-${index}`}>
-                        <li key={`methods-${index}`}>
+                        <li>
                           <Link to="/methods">Methods</Link>
                         </li>
-                        <li key={`admin-${index}`}>
+                        <li>
                           <Link to="/admin">Admin</Link>
                         </li>
                       </React.Fragment>
@@ -88,9 +75,9 @@ function Navbar() {
                 })}
 
               <li>
-                <Link to="/logout" onClick={handleLogout}>
+                <a href="/logout" onClick={handleLogout}>
                   Logout
-                </Link>
+                </a>
               </li>
             </>
           )}
