@@ -26,7 +26,9 @@ security:
     - { path: ^/api/user/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
     - { path: ^/api/recipe/list, roles: PUBLIC_ACCESS }
 
-    # Secure the rest of the /api routes, require ROLE_USER
-    - { path: ^/api, roles: ROLE_USER }
+    # Secure the rest of the /api routes for require ROLE_ADMIN
     - { path: ^/api/method, roles: ROLE_ADMIN }
     - { path: ^/api/brew_guide, roles: ROLE_ADMIN }
+
+    # Secure the rest of the /api routes, require ROLE_USER
+    - { path: ^/api, roles: ROLE_USER }
