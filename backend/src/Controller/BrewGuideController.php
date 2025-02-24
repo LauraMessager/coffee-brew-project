@@ -66,6 +66,7 @@ class BrewGuideController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/add', name: 'create_brew', methods: ['GET', 'POST'])]
   public function create(Request $request): JsonResponse {
     $data = json_decode($request->getContent(), true);
@@ -116,6 +117,7 @@ class BrewGuideController extends AbstractController {
   * @return JsonResponse
   * @param Request $request
   */
+  #[IsGranted('ROLE_ADMIN')]
   #[Route('/delete/{id}', name: 'delete_brew_guide', methods: ['DELETE'])]
   public function delete(Request $request, int $id): JsonResponse {
   

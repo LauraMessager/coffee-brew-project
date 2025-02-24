@@ -28,3 +28,5 @@ security:
 
     # Secure the rest of the /api routes, require ROLE_USER
     - { path: ^/api, roles: ROLE_USER }
+    - { path: ^/api/method, roles: ROLE_ADMIN }
+    - { path: ^/api/brew_guide, roles: ROLE_ADMIN }

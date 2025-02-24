@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BrewGuideTable from "../components/brewGuides/brewGuideTable";
 import MethodTable from "../components/methods/methodsTable";
 import UserTable from "../components/users/userTable";
@@ -12,13 +13,14 @@ const Admin = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user || !user.apiToken) {
-      setError("User is not authenticated");
-      setLoading(false);
+    if (!user || !user.apiToken || user.role !== "admin") {
+      setError("You do not have permission to access this page.");
+      navigate("/");
       return;
     }
 
@@ -96,7 +98,7 @@ const Admin = () => {
     fetchMethods();
     fetchBrewGuides();
     fetchUsers();
-  }, []);
+  }, [navigate]);
 
   const handleDeleteSuccess = (id) => {
     setBrewGuides((prevBrewGuides) =>

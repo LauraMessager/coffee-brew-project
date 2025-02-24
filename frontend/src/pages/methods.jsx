@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MethodForm from "../components/methods/methodForm";
 import { useNavigate } from "react-router-dom";
 
@@ -7,6 +7,15 @@ const MethodPage = () => {
   const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || !user.apiToken || user.role !== "admin") {
+      setError("You do not have permission to access this page.");
+      navigate("/");
+    }
+  }, [navigate]);
 
   const handleMethodSubmit = async ({ name, icon }) => {
     setLoading(true);
