@@ -19,7 +19,7 @@ const RecipeDelete = ({ id, onDeleteSuccess }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8001/api/recipe/${id}/delete`,
+        `http://localhost:8000/api/recipe/${id}/delete`,
         {
           method: "DELETE",
           headers: {

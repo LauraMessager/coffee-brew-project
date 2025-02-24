@@ -26,7 +26,7 @@ const Admin = () => {
 
     const fetchBrewGuides = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/brew_guide/", {
+        const response = await fetch("http://localhost:8000/api/brew_guide/", {
           method: "GET",
           headers: {
             "auth-token": apiToken,
@@ -49,7 +49,7 @@ const Admin = () => {
 
     const fetchMethods = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/method/", {
+        const response = await fetch("http://localhost:8000/api/method/", {
           method: "GET",
           headers: {
             "auth-token": apiToken,
@@ -72,7 +72,7 @@ const Admin = () => {
 
     const fetchUsers = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/user/list", {
+        const response = await fetch("http://localhost:8000/api/user/list", {
           method: "GET",
           headers: {
             "auth-token": apiToken,

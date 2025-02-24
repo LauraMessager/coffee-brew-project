@@ -24,7 +24,7 @@ const RecipeDetailPage = () => {
     const fetchRecipeDetail = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8001/api/recipe/recipe/${id}`,
+          `http://localhost:8000/api/recipe/recipe/${id}`,
           {
             method: "GET",
             headers: {
@@ -79,7 +79,7 @@ const RecipeDetailPage = () => {
       <p>
         {recipe.method_icon ? (
           <img
-            src={`http://localhost:8001/${recipe.method_icon}`}
+            src={`http://localhost:8000/${recipe.method_icon}`}
             alt={recipe.method_name}
             style={{ width: "100px", height: "100px", objectFit: "contain" }}
           />

@@ -20,7 +20,7 @@ const BrewGuideDelete = ({ id, onDeleteSuccess }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8001/api/brew_guide/delete/${id}`,
+        `http://localhost:8000/api/brew_guide/delete/${id}`,
         {
           method: "DELETE",
           headers: {

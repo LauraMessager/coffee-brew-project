@@ -28,7 +28,7 @@ const MethodPage = () => {
     if (icon) formData.append("icon", icon);
 
     try {
-      const response = await fetch("http://localhost:8001/api/method/add", {
+      const response = await fetch("http://localhost:8000/api/method/add", {
         method: "POST",
         headers: {
           "auth-token": apiToken,

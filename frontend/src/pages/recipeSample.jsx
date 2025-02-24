@@ -12,7 +12,7 @@ const RecipeSamplePage = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/recipe/list", {
+        const response = await fetch("http://localhost:8000/api/recipe/list", {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

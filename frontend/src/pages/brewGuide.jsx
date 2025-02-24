@@ -19,7 +19,7 @@ const BrewGuidePage = () => {
 
     const fetchBrewGuides = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/brew_guide/", {
+        const response = await fetch("http://localhost:8000/api/brew_guide/", {
           method: "GET",
           headers: {
             "auth-token": apiToken,

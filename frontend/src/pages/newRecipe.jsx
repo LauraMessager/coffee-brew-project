@@ -23,7 +23,7 @@ const NewRecipePage = () => {
 
     const fetchMethods = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/method/", {
+        const response = await fetch("http://localhost:8000/api/method/", {
           method: "GET",
           headers: {
             "auth-token": apiToken,
@@ -59,7 +59,7 @@ const NewRecipePage = () => {
       setError(null);
 
       const methodId = formData.method.id;
-      const response = await fetch("http://localhost:8001/api/recipe/add", {
+      const response = await fetch("http://localhost:8000/api/recipe/add", {
         method: "POST",
         headers: {
           "auth-token": apiToken,

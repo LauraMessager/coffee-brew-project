@@ -26,7 +26,7 @@ const RecipeUpdate = () => {
     const fetchRecipe = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8001/api/recipe/recipe/${id}`,
+          `http://localhost:8000/api/recipe/recipe/${id}`,
           {
             method: "GET",
             headers: {
@@ -55,7 +55,7 @@ const RecipeUpdate = () => {
 
     const fetchMethods = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/method/", {
+        const response = await fetch("http://localhost:8000/api/method/", {
           method: "GET",
           headers: {
             "auth-token": apiToken,
@@ -91,7 +91,7 @@ const RecipeUpdate = () => {
       setError(null);
 
       const response = await fetch(
-        `http://localhost:8001/api/recipe/update/${id}`,
+        `http://localhost:8000/api/recipe/update/${id}`,
         {
           method: "POST",
           headers: {

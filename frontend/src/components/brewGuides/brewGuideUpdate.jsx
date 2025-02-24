@@ -25,7 +25,7 @@ const BrewGuideUpdate = () => {
     const fetchBrewGuide = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8001/api/brew_guide/brew/${id}`,
+          `http://localhost:8000/api/brew_guide/brew/${id}`,
           {
             method: "GET",
             headers: {
@@ -67,7 +67,7 @@ const BrewGuideUpdate = () => {
       setError(null);
 
       const response = await fetch(
-        `http://localhost:8001/api/brew_guide/update/${id}`,
+        `http://localhost:8000/api/brew_guide/update/${id}`,
         {
           method: "POST",
           headers: {

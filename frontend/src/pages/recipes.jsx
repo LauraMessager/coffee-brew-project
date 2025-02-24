@@ -22,7 +22,7 @@ const RecipesPage = () => {
 
     const fetchRecipes = async () => {
       try {
-        const response = await fetch("http://localhost:8001/api/recipe", {
+        const response = await fetch("http://localhost:8000/api/recipe", {
           method: "GET",
           headers: {
             "auth-token": apiToken,

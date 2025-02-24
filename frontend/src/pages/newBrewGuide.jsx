@@ -25,7 +25,7 @@ const NewBrewGuidePage = () => {
 
     try {
       setLoading(true);
-      const response = await fetch("http://localhost:8001/api/brew_guide/add", {
+      const response = await fetch("http://localhost:8000/api/brew_guide/add", {
         method: "POST",
         headers: {
           "auth-token": apiToken,

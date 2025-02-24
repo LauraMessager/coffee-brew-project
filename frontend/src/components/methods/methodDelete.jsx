@@ -20,7 +20,7 @@ const MethodDelete = ({ id, onDeleteSuccess }) => {
     try {
       setLoading(true);
       const response = await fetch(
-        `http://localhost:8001/api/method/delete/${id}`,
+        `http://localhost:8000/api/method/delete/${id}`,
         {
           method: "DELETE",
           headers: {
