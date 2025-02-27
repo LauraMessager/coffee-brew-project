@@ -18,7 +18,7 @@ const Admin = () => {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!user || !user.apiToken || user.role !== "admin") {
+    if (!user || !user.apiToken || !user.roles.includes("ROLE_ADMIN")) {
       setError("You do not have permission to access this page.");
       navigate("/");
       return;
